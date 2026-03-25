@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Identity Risk Analyzer — Security Dashboard">
+    <title>Dashboard — Identity Risk Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="grid-bg"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="/dashboard" class="navbar-brand">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>RISK_ANALYZER</span>
+        </a>
+        <div class="navbar-links">
+            <a href="/login">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                <span>Login</span>
+            </a>
+            <a href="/register">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                <span>Register</span>
+            </a>
+            <a href="/dashboard" class="active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <span>Dashboard</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="main-content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Security Dashboard
+            </h1>
+            <p>Real-time identity risk monitoring and threat analysis</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+
+            <!-- Total Users -->
+            <div class="stat-card stat-card--accent" id="stat-total-users">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="stat-label">Total Users</div>
+                <div class="stat-value">{{ total_users }}</div>
+            </div>
+
+            <!-- Failed Logins -->
+            <div class="stat-card stat-card--warning" id="stat-failed-logins">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </div>
+                <div class="stat-label">Failed Logins</div>
+                <div class="stat-value">{{ failed_logins }}</div>
+            </div>
+
+            <!-- Account Lockouts -->
+            <div class="stat-card stat-card--danger" id="stat-lockouts">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="stat-label">Account Lockouts</div>
+                <div class="stat-value">{{ lockouts }}</div>
+            </div>
+
+            <!-- Locked Accounts -->
+            <div class="stat-card stat-card--info" id="stat-locked-accounts">
+                <div class="stat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <div class="stat-label">Locked Accounts</div>
+                <div class="stat-value">{{ locked_accounts }}</div>
+            </div>
+
+        </div>
+
+        <!-- Threat Level -->
+        <div class="threat-section glass-card" id="threat-level-card">
+            <h2>Threat Level</h2>
+            {% if threat_level == "LOW" %}
+            <span class="threat-badge threat-badge--low">
+                <span class="pulse-dot"></span>
+                LOW
+            </span>
+            {% elif threat_level == "MEDIUM" %}
+            <span class="threat-badge threat-badge--medium">
+                <span class="pulse-dot"></span>
+                MEDIUM
+            </span>
+            {% else %}
+            <span class="threat-badge threat-badge--high">
+                <span class="pulse-dot"></span>
+                HIGH
+            </span>
+            {% endif %}
+        </div>
+
+        <!-- Recent Security Events -->
+        <div class="events-section">
+            <h2>Recent Security Events</h2>
+
+            {% if events %}
+            <div class="table-wrapper">
+                <table class="cyber-table" id="events-table">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>User</th>
+                            <th>Event</th>
+                            <th>Risk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for e in events %}
+                        <tr>
+                            <td>{{ e.timestamp }}</td>
+                            <td>{{ e.username }}</td>
+                            <td><span class="event-tag">{{ e.event }}</span></td>
+                            <td>
+                                {% if e.risk == "low" %}
+                                <span class="risk-tag risk-tag--low">LOW</span>
+                                {% elif e.risk == "medium" %}
+                                <span class="risk-tag risk-tag--medium">MEDIUM</span>
+                                {% else %}
+                                <span class="risk-tag risk-tag--high">HIGH</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="glass-card empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <polyline points="9 12 12 15 16 10"/>
+                </svg>
+                <p>No security events recorded yet. The system is clear.</p>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</body>
+</html>

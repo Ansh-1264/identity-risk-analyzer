@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,47 @@
     <title>Dashboard — Identity Risk Analyzer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <div class="grid-bg"></div>
 
     <!-- Navbar -->
     <nav class="navbar">
         <a href="/dashboard" class="navbar-brand">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
             <span>RISK_ANALYZER</span>
         </a>
         <div class="navbar-links">
             <a href="/login">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                    <polyline points="10 17 15 12 10 7" />
+                    <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
                 <span>Login</span>
             </a>
             <a href="/register">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="8.5" cy="7" r="4" />
+                    <line x1="20" y1="8" x2="20" y2="14" />
+                    <line x1="23" y1="11" x2="17" y2="11" />
+                </svg>
                 <span>Register</span>
             </a>
             <a href="/dashboard" class="active">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                </svg>
                 <span>Dashboard</span>
             </a>
         </div>
@@ -40,8 +60,9 @@
         <!-- Page Header -->
         <div class="page-header">
             <h1>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
                 Security Dashboard
             </h1>
@@ -54,7 +75,13 @@
             <!-- Total Users -->
             <div class="stat-card stat-card--accent" id="stat-total-users">
                 <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
                 </div>
                 <div class="stat-label">Total Users</div>
                 <div class="stat-value">{{ total_users }}</div>
@@ -63,7 +90,13 @@
             <!-- Failed Logins -->
             <div class="stat-card stat-card--warning" id="stat-failed-logins">
                 <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path
+                            d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                        <line x1="12" y1="9" x2="12" y2="13" />
+                        <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
                 </div>
                 <div class="stat-label">Failed Logins</div>
                 <div class="stat-value">{{ failed_logins }}</div>
@@ -72,7 +105,11 @@
             <!-- Account Lockouts -->
             <div class="stat-card stat-card--danger" id="stat-lockouts">
                 <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
                 </div>
                 <div class="stat-label">Account Lockouts</div>
                 <div class="stat-value">{{ lockouts }}</div>
@@ -81,13 +118,95 @@
             <!-- Locked Accounts -->
             <div class="stat-card stat-card--info" id="stat-locked-accounts">
                 <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
                 </div>
                 <div class="stat-label">Locked Accounts</div>
                 <div class="stat-value">{{ locked_accounts }}</div>
             </div>
 
         </div>
+
+        <h2>⚠ Active Threats</h2>
+
+        {% if alerts %}
+        <div style="margin-top: 20px;">
+            <table
+                style="width:100%; border-collapse: collapse; background-color: #0f172a; border-radius: 10px; overflow: hidden;">
+
+                <thead style="background-color: #1e293b;">
+                    <tr>
+                        <th style="padding: 12px; text-align: left;">User</th>
+                        <th style="padding: 12px; text-align: left;">Attack Type</th>
+                        <th style="padding: 12px; text-align: left;">Severity</th>
+                        <th style="padding: 12px; text-align: left;">Failed Attempts</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for alert in alerts %}
+                    <tr style="border-bottom: 1px solid #334155;">
+                        <td style="padding: 12px;">{{ alert.user }}</td>
+                        <td style="padding: 12px;">{{ alert.type }}</td>
+
+                        <td style="padding: 12px;">
+                            {% if alert.severity == "HIGH" %}
+                            <span style="
+                            background-color: #7f1d1d;
+                            color: #fecaca;
+                            padding: 4px 10px;
+                            border-radius: 20px;
+                            font-size: 12px;
+                            font-weight: bold;">
+                                HIGH
+                            </span>
+
+                            {% elif alert.severity == "MEDIUM" %}
+                            <span style="
+                            background-color: #78350f;
+                            color: #fde68a;
+                            padding: 4px 10px;
+                            border-radius: 20px;
+                            font-size: 12px;
+                            font-weight: bold;">
+                                MEDIUM
+                            </span>
+
+                            {% else %}
+                            <span style="
+                            background-color: #14532d;
+                            color: #bbf7d0;
+                            padding: 4px 10px;
+                            border-radius: 20px;
+                            font-size: 12px;
+                            font-weight: bold;">
+                                LOW
+                            </span>
+                            {% endif %}
+                        </td>
+
+                        <td style="padding: 12px;">
+                            <span style="
+                        background-color: #1e293b;
+                        padding: 4px 10px;
+                        border-radius: 8px;">
+                                {{ alert.failed_attempts }}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        {% else %}
+        <p>No active threats 🎉</p>
+        {% endif %}
+
 
         <!-- Threat Level -->
         <div class="threat-section glass-card" id="threat-level-card">
@@ -147,9 +266,10 @@
             </div>
             {% else %}
             <div class="glass-card empty-state">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    <polyline points="9 12 12 15 16 10"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <polyline points="9 12 12 15 16 10" />
                 </svg>
                 <p>No security events recorded yet. The system is clear.</p>
             </div>
@@ -158,4 +278,5 @@
 
     </div>
 </body>
+
 </html>

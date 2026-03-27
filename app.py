@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect
+from flask import session
 import sqlite3
 import bcrypt
 from datetime import datetime, timedelta
 import json
 import os
+from detection_engine import detect_brute_force, read_logs
 
 def log_event(username, event, risk):
 
@@ -21,6 +23,7 @@ def log_event(username, event, risk):
         print("LOG EVENT:", log_entry)
 
 app = Flask(__name__)
+app.secret_key = "supersecretkey"
 
 DATABASE = "database.db"
 
@@ -145,6 +148,7 @@ def login_user():
         conn.close()
 
         log_event(username, "login_success", "low")
+        session["user"] = username        
 
         return redirect("/dashboard")
 
@@ -186,20 +190,48 @@ def login_user():
 @app.route("/dashboard")
 def dashboard():
 
-    conn = sqlite3.connect(DATABASE)
+    if "user" not in session:
+        return redirect("/login")
+
+    conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
+    threat_level = "LOW"
+    alerts = []
+
+    # Total users
     cursor.execute("SELECT COUNT(*) FROM users")
     total_users = cursor.fetchone()[0]
 
+    # Locked accounts
     cursor.execute("SELECT COUNT(*) FROM users WHERE lockout_time IS NOT NULL")
     locked_accounts = cursor.fetchone()[0]
 
     conn.close()
 
-    failed_logins = 0
-    lockouts = 0
-    events = []
+    # 🧠 NEW: Read logs
+    logs = read_logs()
+
+    # Count failed logins & lockouts from logs
+    failed_logins = sum(1 for log in logs if log["event"] == "failed_login")
+    lockouts = sum(1 for log in logs if log["event"] == "account_lockout")
+
+    # Use logs as events
+    events = logs[-10:] if logs else []   # last 10 events
+
+    # Detection engine
+    alerts = detect_brute_force(logs)
+
+    return render_template(
+        "dashboard.html",
+        total_users=total_users,
+        locked_accounts=locked_accounts,
+        failed_logins=failed_logins,
+        lockouts=lockouts,
+        events=events,
+        alerts=alerts,
+        threat_level=threat_level
+    )
 
     try:
         with open("logs/security_logs.json", "r") as f:
@@ -219,12 +251,10 @@ def dashboard():
         pass
 
     # Threat level calculation
-    if failed_logins >= 8:
+    if alerts:
         threat_level = "HIGH"
     elif failed_logins >= 4:
         threat_level = "MEDIUM"
-    else:
-        threat_level = "LOW"
 
     events = events[-10:]
 

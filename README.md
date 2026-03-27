@@ -26,4 +26,11 @@ A Flask-based cybersecurity project simulating an Identity and Access Management
 3. Install requirements
 4. Run app.py
 
-## Future Work- Building a SOC Detection Engine to analyze logs and detect attack patterns.
+## Features (Updated)
+
+- Secure authentication with session management
+- Brute-force attack detection engine
+- Real-time threat monitoring dashboard
+- Failed login tracking & account lockout
+- Security event logging system
+- Dynamic threat level classification (LOW / MEDIUM / HIGH)
